@@ -27,11 +27,13 @@ public class Player : MonoBehaviour {
 	void Start () {
 
 		// Get required components and default camera orientation
-		_cam = Camera.main;
+		_cam = UICamera.mainCamera; // use NGUI's camera
 		if (_cam == null){
 			Debug.LogError("Player: Start: _cam is null");
 			return;
 		}
+
+		_cam.transform.position = this.transform.position;
 
 		_initialCameraRot = _cam.transform.rotation;
 
@@ -80,7 +82,8 @@ public class Player : MonoBehaviour {
 		}
 	}
 	private void UpdatePosition(){
-		
+		_cam.transform.position = this.transform.position;
+
 		// Check keyboard input
 		Vector3 moveDirection = new Vector3();
 		if (Input.GetKey (KeyCode.W)) {

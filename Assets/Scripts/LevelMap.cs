@@ -11,9 +11,11 @@ public class LevelMap : MonoBehaviour
 		GameObject[] enemySpawnMarkers = GameObject.FindGameObjectsWithTag("EnemySpawnMarker");
 		foreach(GameObject enemySpawnMarker in enemySpawnMarkers)
 		{
-			Instantiate(_enemySpawnerPrefab, enemySpawnMarker.transform.position, Quaternion.identity);
+			GameObject enemySpawnerObject = Instantiate(_enemySpawnerPrefab, enemySpawnMarker.transform.position, Quaternion.identity) as GameObject;
+			enemySpawnerObject.transform.parent = this.transform;
 		}
 
-		Instantiate(_playerPrefab, _playerPrefab.transform.position, Quaternion.identity);
+		GameObject playerObject = Instantiate(_playerPrefab, _playerPrefab.transform.position, Quaternion.identity) as GameObject;
+		playerObject.transform.parent = this.transform;
 	}
 }
