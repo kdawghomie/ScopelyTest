@@ -23,11 +23,11 @@ public class LevelObjectManager : MonoBehaviour {
 
 	#region methods
 
-	public GameObject InstantiateLevel(int levelNumber)
+	public GameObject InstantiateLevel(string levelName)
 	{
 		GameObject result = null;
 
-		if(levelNumber == 1)
+		if(levelName == "level1")
 		{
 			result = Instantiate(_level1, Vector3.zero, Quaternion.identity) as GameObject;
 		}

@@ -3,16 +3,17 @@ using System.Collections;
 
 public class StateGameplay : State 
 {
-	private int _levelNumber;
+	private string _levelName;
 
-	public StateGameplay(int levelNumber)
+	public StateGameplay(string levelName)
 	{
-		_levelNumber = levelNumber;
+		_levelName = levelName;
 	}
 
 	public override void Enter()
 	{
-		LevelObjectManager.GetInstance().InstantiateLevel(_levelNumber);
+		LevelObjectManager.GetInstance().InstantiateLevel(_levelName);
+		UIManager.GetInstance().InstantiateForegroundUI(UIManager.GetInstance().GameplayHUD);
 	}
 	
 	public override void Exit()

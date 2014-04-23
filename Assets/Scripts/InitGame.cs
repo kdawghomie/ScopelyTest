@@ -8,7 +8,7 @@ public class InitGame : MonoBehaviour {
 	void Awake()
 	{
 		_stateMachine = new GameStateMachine();
-		_stateMachine.SetState(new StateGameplay(1));
+		_stateMachine.SetState(new StateGameplay("level1"));
 	}
 
 	void Update()
