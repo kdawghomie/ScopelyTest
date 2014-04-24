@@ -11,6 +11,7 @@ public class StateGameStart : State
 	{
 		GameObject startScreenObject = UIManager.GetInstance().InstantiateForegroundUI(UIManager.GetInstance().StartScreenUI);
 		_startScreenUI = startScreenObject.GetComponent<StartScreenUI>();
+		_startScreenUI.Init();
 		_startScreenUI.PlayPressed += OnPlayButtonPressed;
 	}
 	

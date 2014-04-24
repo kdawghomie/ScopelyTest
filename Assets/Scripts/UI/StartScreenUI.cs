@@ -3,20 +3,26 @@ using System.Collections;
 
 public class StartScreenUI : MonoBehaviour {
 
+	[SerializeField] private GameObject _playButton;
+
 	public delegate void EventDelegate();
 	public event EventDelegate PlayPressed; 
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+	public void Init()
+	{
+		TweenInButtons();
 	}
 
-	void OnPlayPressed()
+	private void TweenInButtons()
+	{
+		iTween.MoveFrom(_playButton, iTween.Hash(
+			"x", -2f,
+			"time", 0.8f,
+			"easetype", "easeOutBounce"
+		));
+	}
+
+	private void OnPlayPressed()
 	{
 		if(PlayPressed != null)
 		{
