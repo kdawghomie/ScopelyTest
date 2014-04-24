@@ -7,9 +7,9 @@ public class PressQToQuit : MonoBehaviour {
 		if (Input.GetKey (KeyCode.Q)) {
 #if UNITY_EDITOR
 			UnityEditor.EditorApplication.isPlaying = false;
-			return;
-#endif
+#else
 			Application.Quit();
+#endif
 		}
 	}
 }

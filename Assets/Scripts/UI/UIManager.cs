@@ -25,7 +25,7 @@ public class UIManager : MonoBehaviour {
 	
 	public GameObject InstantiateForegroundUI(GameObject uiPrefab)
 	{
-		GameObject result = Instantiate(uiPrefab, Vector3.zero, Quaternion.identity) as GameObject;
+		GameObject result = UICamera.Instantiate(uiPrefab, Vector3.zero, Quaternion.identity) as GameObject;
 		result.transform.parent = (GameObject.Find("ForegroundPanel") as GameObject).transform;
 		result.transform.localScale = uiPrefab.transform.localScale;
 		result.transform.localPosition = uiPrefab.transform.localPosition;

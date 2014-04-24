@@ -18,7 +18,7 @@ public class PlayerWeapon : MonoBehaviour {
 	void Start () {
 		
 		// Get reference to Camera
-		_cam = UICamera.mainCamera;
+		_cam = Camera.main;
 		if (_cam == null){
 			Debug.LogError("PlayerWeapon: Start: could not find required Camera component");
 			return;
