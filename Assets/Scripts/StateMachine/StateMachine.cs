@@ -11,6 +11,7 @@ public abstract class StateMachine
 			_currentState.Exit();
 		}
 		_currentState = state;
+		_currentState.StateMachine = this;
 		_currentState.Enter();
 	}
 

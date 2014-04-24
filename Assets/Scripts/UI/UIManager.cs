@@ -17,7 +17,8 @@ public class UIManager : MonoBehaviour {
 	
 	#region objects
 	
-	[SerializeField] public GameObject GameplayHUD;
+	public GameObject GameplayHUD;
+	public GameObject StartScreenUI;
 	
 	#endregion
 
