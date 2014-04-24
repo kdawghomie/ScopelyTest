@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class StartScreenUI : MonoBehaviour 
 {
-	[SerializeField] private UILabel _titleLabel;
+	[SerializeField] private GameObject _gameLogo;
 	[SerializeField] private List<GameObject> _menuButtons;
 
 	public delegate void EventDelegate();
@@ -11,7 +11,7 @@ public class StartScreenUI : MonoBehaviour
 
 	public void Init()
 	{
-		_titleLabel.gameObject.SetActive(false);
+		_gameLogo.SetActive(false);
 		foreach(GameObject menuButton in _menuButtons)
 		{
 			menuButton.SetActive(false);
@@ -23,12 +23,12 @@ public class StartScreenUI : MonoBehaviour
 
 	private void TweenInTitleLabel()
 	{
-		_titleLabel.gameObject.SetActive(true);
+		_gameLogo.SetActive(true);
 
-		iTween.ScaleFrom(_titleLabel.gameObject, iTween.Hash(
+		iTween.ScaleFrom(_gameLogo, iTween.Hash(
 			"scale", new Vector3(60f, 60f, 1f),
-			"easetype", "easeOutElastic",
-			"time", .28f
+			"easetype", "easeInOutElastic",
+			"time", .3f
 		));
 	}
 
