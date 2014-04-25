@@ -23,20 +23,21 @@ public class LevelObjectManager : MonoBehaviour {
 
 	#region methods
 
-	public GameObject InstantiateLevel(string levelName)
+	public LevelMap InstantiateLevel(string levelName)
 	{
-		GameObject result = null;
+		LevelMap resultLevel = null;
 
 		if(levelName == "level1")
 		{
-			result = Instantiate(_level1, Vector3.zero, Quaternion.identity) as GameObject;
+			GameObject resultObject = Instantiate(_level1, Vector3.zero, Quaternion.identity) as GameObject;
+			resultLevel = resultObject.GetComponent<LevelMap>();
 		}
 		else
 		{
 			Debug.LogError("Level not found.");
 		}
 
-		return result;
+		return resultLevel;
 	}
 
 	#endregion

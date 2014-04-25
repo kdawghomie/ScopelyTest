@@ -78,8 +78,17 @@ public class Enemy : MonoBehaviour {
 		
 		// Chase after player
 		Vector3 directionToPlayer = _player.transform.position - this.transform.position;
+		if( directionToPlayer.magnitude <= 15f )
+		{
+			AttackPlayer();
+		}
+
 		directionToPlayer.Normalize();
 		Movement.Move(this.gameObject, directionToPlayer, MOVE_SPEED);
+	}
+	private void AttackPlayer()
+	{
+
 	}
 	private void Ragdoll(){
 		this.rigidbody.constraints = RigidbodyConstraints.None;

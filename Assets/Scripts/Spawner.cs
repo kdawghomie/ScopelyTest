@@ -33,6 +33,7 @@ public class Spawner : MonoBehaviour {
 		float radius = Mathf.Sqrt(Random.value * SPAWN_RADIUS);
 		float rot = Random.value * Mathf.PI * 2.0f;
 		Vector3 spawnPos = new Vector3(Mathf.Sin(rot) * radius, Mathf.Cos(rot) * radius, 0.0f) + this.transform.position;
+		e.transform.parent = this.transform.parent;
 		e.transform.position = spawnPos;
 	}
 	public int EnemyCount(){
