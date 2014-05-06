@@ -41,10 +41,6 @@ public class Player : MonoBehaviour {
 
 		_initialCameraRot = _cam.transform.rotation;
 
-		// Capture the mouse
-		Screen.showCursor = false;
-		Screen.lockCursor = true;
-
 		// Set default render settings
 		DefaultFog();
 		DefaultClipping();

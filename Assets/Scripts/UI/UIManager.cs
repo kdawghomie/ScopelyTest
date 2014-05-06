@@ -19,6 +19,7 @@ public class UIManager : MonoBehaviour {
 	
 	public GameObject GameplayHUD;
 	public GameObject StartScreenUI;
+	public GameObject GameOverUI;
 	
 	#endregion
 

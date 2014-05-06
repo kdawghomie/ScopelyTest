@@ -63,6 +63,45 @@
     <Compile Include="Spawner.cs">
       <Link>Scripts\Spawner.cs</Link>
     </Compile>
+    <Compile Include="InitGame.cs">
+      <Link>Scripts\InitGame.cs</Link>
+    </Compile>
+    <Compile Include="LevelMap.cs">
+      <Link>Scripts\LevelMap.cs</Link>
+    </Compile>
+    <Compile Include="LevelObjectManager.cs">
+      <Link>Scripts\LevelObjectManager.cs</Link>
+    </Compile>
+    <Compile Include="StateMachine\GameStateMachine.cs">
+      <Link>Scripts\StateMachine\GameStateMachine.cs</Link>
+    </Compile>
+    <Compile Include="StateMachine\State.cs">
+      <Link>Scripts\StateMachine\State.cs</Link>
+    </Compile>
+    <Compile Include="StateMachine\StateGameOver.cs">
+      <Link>Scripts\StateMachine\StateGameOver.cs</Link>
+    </Compile>
+    <Compile Include="StateMachine\StateGameStart.cs">
+      <Link>Scripts\StateMachine\StateGameStart.cs</Link>
+    </Compile>
+    <Compile Include="StateMachine\StateGameplay.cs">
+      <Link>Scripts\StateMachine\StateGameplay.cs</Link>
+    </Compile>
+    <Compile Include="StateMachine\StateMachine.cs">
+      <Link>Scripts\StateMachine\StateMachine.cs</Link>
+    </Compile>
+    <Compile Include="UI\GameOverUI.cs">
+      <Link>Scripts\UI\GameOverUI.cs</Link>
+    </Compile>
+    <Compile Include="UI\GameplayHUD.cs">
+      <Link>Scripts\UI\GameplayHUD.cs</Link>
+    </Compile>
+    <Compile Include="UI\StartScreenUI.cs">
+      <Link>Scripts\UI\StartScreenUI.cs</Link>
+    </Compile>
+    <Compile Include="UI\UIManager.cs">
+      <Link>Scripts\UI\UIManager.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="BloodSpray.cs.meta">
@@ -103,6 +142,63 @@
     </None>
     <None Include="bin\Debug.meta">
       <Link>Scripts\bin\Debug.meta</Link>
+    </None>
+    <None Include="InitGame.cs.meta">
+      <Link>Scripts\InitGame.cs.meta</Link>
+    </None>
+    <None Include="LevelMap.cs.meta">
+      <Link>Scripts\LevelMap.cs.meta</Link>
+    </None>
+    <None Include="LevelObjectManager.cs.meta">
+      <Link>Scripts\LevelObjectManager.cs.meta</Link>
+    </None>
+    <None Include="ScopelyTest.csproj.meta">
+      <Link>Scripts\ScopelyTest.csproj.meta</Link>
+    </None>
+    <None Include="ScopelyTest.sln.meta">
+      <Link>Scripts\ScopelyTest.sln.meta</Link>
+    </None>
+    <None Include="ScopelyTest.userprefs">
+      <Link>Scripts\ScopelyTest.userprefs</Link>
+    </None>
+    <None Include="ScopelyTest.userprefs.meta">
+      <Link>Scripts\ScopelyTest.userprefs.meta</Link>
+    </None>
+    <None Include="StateMachine.meta">
+      <Link>Scripts\StateMachine.meta</Link>
+    </None>
+    <None Include="UI.meta">
+      <Link>Scripts\UI.meta</Link>
+    </None>
+    <None Include="StateMachine\GameStateMachine.cs.meta">
+      <Link>Scripts\StateMachine\GameStateMachine.cs.meta</Link>
+    </None>
+    <None Include="StateMachine\State.cs.meta">
+      <Link>Scripts\StateMachine\State.cs.meta</Link>
+    </None>
+    <None Include="StateMachine\StateGameOver.cs.meta">
+      <Link>Scripts\StateMachine\StateGameOver.cs.meta</Link>
+    </None>
+    <None Include="StateMachine\StateGameStart.cs.meta">
+      <Link>Scripts\StateMachine\StateGameStart.cs.meta</Link>
+    </None>
+    <None Include="StateMachine\StateGameplay.cs.meta">
+      <Link>Scripts\StateMachine\StateGameplay.cs.meta</Link>
+    </None>
+    <None Include="StateMachine\StateMachine.cs.meta">
+      <Link>Scripts\StateMachine\StateMachine.cs.meta</Link>
+    </None>
+    <None Include="UI\GameOverUI.cs.meta">
+      <Link>Scripts\UI\GameOverUI.cs.meta</Link>
+    </None>
+    <None Include="UI\GameplayHUD.cs.meta">
+      <Link>Scripts\UI\GameplayHUD.cs.meta</Link>
+    </None>
+    <None Include="UI\StartScreenUI.cs.meta">
+      <Link>Scripts\UI\StartScreenUI.cs.meta</Link>
+    </None>
+    <None Include="UI\UIManager.cs.meta">
+      <Link>Scripts\UI\UIManager.cs.meta</Link>
     </None>
   </ItemGroup>
 </Project>

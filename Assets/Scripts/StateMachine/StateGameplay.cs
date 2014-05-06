@@ -13,6 +13,8 @@ public class StateGameplay : State
 
 	public override void Enter()
 	{
+		ShowMouse(false);
+
 		GameObject gameHUDObject = UIManager.GetInstance().InstantiateForegroundUI(UIManager.GetInstance().GameplayHUD);
 		_gameHUD = gameHUDObject.GetComponent<GameplayHUD>();
 		_gameHUD.Init();
@@ -23,14 +25,14 @@ public class StateGameplay : State
 	
 	public override void Exit()
 	{
+		ShowMouse(true);
+
 		GameObject.Destroy(_levelMap.gameObject);
 		GameObject.Destroy(_gameHUD.gameObject);	
 	}
 	
 	public override void Update(float deltaTime)
-	{
-
-	}
+	{}
 
 	private void OnPlayerDamageTaken(float playerHealth)
 	{
@@ -43,6 +45,7 @@ public class StateGameplay : State
 
 	private void OnGameOver()
 	{
+		_stateMachine.SetState(new StateGameOver());
 		Debug.Log("GAME OVER");
 	}
 }

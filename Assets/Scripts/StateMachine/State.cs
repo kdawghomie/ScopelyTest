@@ -1,4 +1,4 @@
-﻿using System;
+﻿using UnityEngine;
 
 public abstract class State 
 {
@@ -14,4 +14,10 @@ public abstract class State
 	public abstract void Exit();
 
 	public abstract void Update(float deltaTime);
+
+	protected void ShowMouse(bool show)
+	{
+		Screen.showCursor = show;
+		Screen.lockCursor = !show;
+	}
 }
