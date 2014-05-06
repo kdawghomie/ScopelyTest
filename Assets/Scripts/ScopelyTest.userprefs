@@ -1,0 +1,30 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Enemy.cs">
+    <Files>
+      <File FileName="InitGame.cs" Line="14" Column="15" />
+      <File FileName="../../../Downloads/BlockSumProduction/Assets/Scripts/UI/MapUI/MapStateMachine/MapStateMachine.cs" Line="13" Column="3" />
+      <File FileName="StateMachine/GameStateMachine.cs" Line="7" Column="1" />
+      <File FileName="StateMachine/StateGameplay.cs" Line="14" Column="30" />
+      <File FileName="StateMachine/StateGameStart.cs" Line="14" Column="25" />
+      <File FileName="PlayerWeapon.cs" Line="47" Column="27" />
+      <File FileName="Enemy.cs" Line="91" Column="3" />
+      <File FileName="Movement.cs" Line="48" Column="37" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="ScopelyTest" expanded="True">
+            <Node name="Scripts" expanded="True">
+              <Node name="Enemy.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

@@ -48,9 +48,6 @@
     <Compile Include="FireExplosion.cs">
       <Link>Scripts\FireExplosion.cs</Link>
     </Compile>
-    <Compile Include="HUD.cs">
-      <Link>Scripts\HUD.cs</Link>
-    </Compile>
     <Compile Include="Movement.cs">
       <Link>Scripts\Movement.cs</Link>
     </Compile>
@@ -79,9 +76,6 @@
     </None>
     <None Include="FireExplosion.cs.meta">
       <Link>Scripts\FireExplosion.cs.meta</Link>
-    </None>
-    <None Include="HUD.cs.meta">
-      <Link>Scripts\HUD.cs.meta</Link>
     </None>
     <None Include="Movement.cs.meta">
       <Link>Scripts\Movement.cs.meta</Link>

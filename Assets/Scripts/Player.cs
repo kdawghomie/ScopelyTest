@@ -17,11 +17,17 @@ public class Player : MonoBehaviour {
 	// Player Constants
 	public const float MOVE_SPEED = 75.0f;
 	public const float PLAYER_HEIGHT = 16.0f;
-	
+
+	// Events
+	public delegate void DamageTakenHandler(float newHealth);
+	public event DamageTakenHandler DamageTaken = null;
+
 	private Camera _cam;
 	private float _rotX;
 	private float _rotY;
 	private Quaternion _initialCameraRot;
+
+	private float _health = 100.0f;
 	
 	#region Unity Lifecycle
 	void Start () {
@@ -52,6 +58,21 @@ public class Player : MonoBehaviour {
 		// Let the player look, shoot, and move
 		UpdateLookRotation ();
 		UpdatePosition ();
+	}
+	#endregion
+
+	#region Public
+	public void AttackWithDamage(float damage)
+	{
+		_health -= damage;
+		if(_health < 0.0f)
+		{
+			_health = 0.0f;
+		}
+		if(DamageTaken != null)
+		{
+			DamageTaken(_health);
+		}
 	}
 	#endregion
 

@@ -15,8 +15,10 @@ public class StateGameplay : State
 	{
 		GameObject gameHUDObject = UIManager.GetInstance().InstantiateForegroundUI(UIManager.GetInstance().GameplayHUD);
 		_gameHUD = gameHUDObject.GetComponent<GameplayHUD>();
+		_gameHUD.Init();
 
 		_levelMap = LevelObjectManager.GetInstance().InstantiateLevel(_levelName);
+		_levelMap.Player.DamageTaken += OnPlayerDamageTaken;
 	}
 	
 	public override void Exit()
@@ -28,5 +30,19 @@ public class StateGameplay : State
 	public override void Update(float deltaTime)
 	{
 
+	}
+
+	private void OnPlayerDamageTaken(float playerHealth)
+	{
+		_gameHUD.SetHealth(playerHealth);
+		if(playerHealth <= 0f)
+		{
+			OnGameOver();
+		}
+	}
+
+	private void OnGameOver()
+	{
+		Debug.Log("GAME OVER");
 	}
 }

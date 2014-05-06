@@ -2,14 +2,17 @@ using UnityEngine;
 using System.Collections;
 
 public class Enemy : MonoBehaviour {
-	
+
+	public const float ATTACK_DAMAGE = 10.0f;
+	public const float ATTACK_RESET_TIME = 1.25f;
 	public const float MOVE_SPEED = 32.0f;
 	public const float CORPSE_REMOVAL_DELAY = 5.0f;
 	
 	private Player _player;
 	private int _updates;
 	private float _timeDead;
-	private bool _dead;
+	private bool _dead = false;
+	private bool _canAttack = true;
 	
 	#region Unity Lifecycle
 	void Awake(){
@@ -88,7 +91,16 @@ public class Enemy : MonoBehaviour {
 	}
 	private void AttackPlayer()
 	{
-
+		if(_canAttack)
+		{
+			_player.AttackWithDamage(ATTACK_DAMAGE);
+			_canAttack = false;
+			Invoke("ResetCanAttack", ATTACK_RESET_TIME);
+		}
+	}
+	private void ResetCanAttack()
+	{
+		_canAttack = true;
 	}
 	private void Ragdoll(){
 		this.rigidbody.constraints = RigidbodyConstraints.None;
