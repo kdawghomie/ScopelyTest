@@ -3,6 +3,7 @@ using System.Collections;
 
 public class LevelObjectManager : MonoBehaviour {
 
+	#region singleton data
 	private static LevelObjectManager _instance;
 
 	public static LevelObjectManager GetInstance()
@@ -14,15 +15,13 @@ public class LevelObjectManager : MonoBehaviour {
 		}
 		return _instance;
 	}
+	#endregion
 
 	#region objects
-
 	[SerializeField] private GameObject _level1;
-
 	#endregion
 
 	#region exposed
-
 	public LevelMap InstantiateLevel(string levelName)
 	{
 		LevelMap resultLevel = null;
@@ -39,6 +38,5 @@ public class LevelObjectManager : MonoBehaviour {
 
 		return resultLevel;
 	}
-
 	#endregion
 }

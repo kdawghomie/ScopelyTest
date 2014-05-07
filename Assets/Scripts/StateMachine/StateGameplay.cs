@@ -11,6 +11,7 @@ public class StateGameplay : State
 		_levelName = levelName;
 	}
 
+	#region overriding from State
 	public override void Enter()
 	{
 		ShowMouse(false);
@@ -21,19 +22,25 @@ public class StateGameplay : State
 
 		_levelMap = LevelObjectManager.GetInstance().InstantiateLevel(_levelName);
 		_levelMap.Player.DamageTaken += OnPlayerDamageTaken;
+		_levelMap.Player.KilledEnemy += OnEnemyDead;
 	}
 	
 	public override void Exit()
 	{
-		ShowMouse(true);
-
+		_levelMap.Player.enabled = false;
 		GameObject.Destroy(_levelMap.gameObject);
-		GameObject.Destroy(_gameHUD.gameObject);	
+		// We must delay HUD destruction a bit, since we cannot destroy NGUI elements mid-frame whilst physics triggers/functions are active;
+		// this is because NGUI uses DestroyImmediate when in Editor and Unity will not allow DestroyImmediate and physics calls to be called in the same frame
+		GameObject.Destroy(_gameHUD.gameObject, .001f);	
+
+		ShowMouse(true);
 	}
 	
 	public override void Update(float deltaTime)
 	{}
+	#endregion
 
+	#region private
 	private void OnPlayerDamageTaken(float playerHealth)
 	{
 		_gameHUD.SetHealth(playerHealth);
@@ -43,8 +50,15 @@ public class StateGameplay : State
 		}
 	}
 
+	private void OnEnemyDead(Enemy enemy)
+	{
+		GameObject pickup = ItemPickupManager.GetInstance().InstantiateRandomPickup(enemy.transform.position);
+		pickup.transform.parent = _levelMap.transform;
+	}
+
 	private void OnGameOver()
 	{
 		_stateMachine.SetState(new StateGameOver(_levelName));
 	}
+	#endregion
 }

@@ -22,15 +22,23 @@ public class Player : MonoBehaviour {
 	public delegate void DamageTakenHandler(float newHealth);
 	public event DamageTakenHandler DamageTaken = null;
 
+	public delegate void KilledEnemyHandler(Enemy enemy);
+	public event KilledEnemyHandler KilledEnemy = null;
+
+	// Private member variables
 	private Camera _cam;
 	private float _rotX;
 	private float _rotY;
 	private Quaternion _initialCameraRot;
+	private Transform _capsuleCollider;
+	private Quaternion _capsuleColliderRotation;
 
 	private float _health = 100.0f;
 	
 	#region Unity Lifecycle
 	void Start () {
+		_capsuleCollider = this.transform.FindChild("PlayerCollider");
+		_capsuleColliderRotation = _capsuleCollider.rotation;
 
 		// Get required components and default camera orientation
 		_cam = Camera.main;
@@ -68,6 +76,14 @@ public class Player : MonoBehaviour {
 		if(DamageTaken != null)
 		{
 			DamageTaken(_health);
+		}
+	}
+
+	public void OnKilledEnemy(Enemy enemy)
+	{
+		if(KilledEnemy != null)
+		{
+			KilledEnemy(enemy);
 		}
 	}
 	#endregion
@@ -126,6 +142,9 @@ public class Player : MonoBehaviour {
 		Quaternion xQuaternion = Quaternion.AngleAxis(_rotX, Vector3.up);
 		Quaternion yQuaternion = Quaternion.AngleAxis(_rotY, Vector3.left);
 		_cam.transform.localRotation = _initialCameraRot * xQuaternion * yQuaternion;
+
+		// player collider should never rotate with camera
+		_capsuleCollider.rotation = _capsuleColliderRotation;
 	}
 	#endregion
 }

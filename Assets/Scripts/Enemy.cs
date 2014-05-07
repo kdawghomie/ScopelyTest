@@ -71,6 +71,14 @@ public abstract class Enemy : MonoBehaviour {
 			this.GetComponent<MeshRenderer>().enabled = true;
 		}
 	}
+
+	protected void OnCollisionStay(Collision collision)
+	{
+		if(collision.gameObject.name == "PlayerCollider")
+		{
+			AttackPlayer();
+		}
+	}
 	#endregion
 	
 	#region Internal Helpers
@@ -83,11 +91,6 @@ public abstract class Enemy : MonoBehaviour {
 		
 		// Chase after player
 		Vector3 directionToPlayer = _player.transform.position - this.transform.position;
-		if( directionToPlayer.magnitude <= 15f )
-		{
-			AttackPlayer();
-		}
-
 		directionToPlayer.Normalize();
 		Movement.Move(this.gameObject, directionToPlayer, MOVE_SPEED);
 	}
@@ -119,11 +122,15 @@ public abstract class Enemy : MonoBehaviour {
 	}
 	protected virtual void TakeDamage(float damage)
 	{
-		_health -= damage;
-		if(_health <= 0f)
+		if(!_dead)
 		{
-			_health = 0f;
-			_dead = true;
+			_health -= damage;
+			if(_health <= 0f)
+			{
+				_health = 0f;
+				_dead = true;
+				_player.OnKilledEnemy(this);
+			}
 		}
 	}
 	#endregion
