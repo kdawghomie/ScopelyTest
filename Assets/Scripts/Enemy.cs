@@ -1,11 +1,12 @@
 using UnityEngine;
 using System.Collections;
 
-public class Enemy : MonoBehaviour {
+public abstract class Enemy : MonoBehaviour {
 
-	public const float ATTACK_DAMAGE = 10.0f;
-	public const float ATTACK_RESET_TIME = 1.25f;
-	public const float MOVE_SPEED = 32.0f;
+	[SerializeField] private float ATTACK_DAMAGE = 1.0f;
+	[SerializeField] private float ATTACK_RESET_TIME = 1.0f;
+	[SerializeField] private float MOVE_SPEED = 32.0f;
+
 	public const float CORPSE_REMOVAL_DELAY = 5.0f;
 	
 	private Player _player;
@@ -16,13 +17,13 @@ public class Enemy : MonoBehaviour {
 	private float _health = 100f;
 	
 	#region Unity Lifecycle
-	void Awake(){
+	protected virtual void Awake(){
 		this.GetComponent<MeshRenderer>().enabled = false;
 		this.collider.enabled = true;
 		this.rigidbody.angularDrag = 0.15f;
 		this.rigidbody.drag = 1000.0f;
 	}
-	void Start () {
+	protected virtual void Start () {
 		
 		// Get a reference to the Player. So we can chase him
 		_timeDead = Random.value * CORPSE_REMOVAL_DELAY * 0.33f;
@@ -36,7 +37,7 @@ public class Enemy : MonoBehaviour {
 		MoveTowardsPlayer();
 	}
 
-	void LateUpdate (){
+	protected virtual void LateUpdate (){
 
 		// If dead, do nothing
 		if (_dead){
@@ -47,7 +48,7 @@ public class Enemy : MonoBehaviour {
 		this.rigidbody.isKinematic = false;
 	}
 
-	void Update () {
+	protected virtual void Update () {
 
 		// Remove corpse after a timeout
 		if (_dead){
@@ -73,7 +74,7 @@ public class Enemy : MonoBehaviour {
 	#endregion
 	
 	#region Internal Helpers
-	private void MoveTowardsPlayer(){
+	protected virtual void MoveTowardsPlayer(){
 
 		// Early return if there is no player
 		if (_player == null){
@@ -90,7 +91,7 @@ public class Enemy : MonoBehaviour {
 		directionToPlayer.Normalize();
 		Movement.Move(this.gameObject, directionToPlayer, MOVE_SPEED);
 	}
-	private void AttackPlayer()
+	protected virtual void AttackPlayer()
 	{
 		if(_canAttack)
 		{
@@ -116,7 +117,7 @@ public class Enemy : MonoBehaviour {
 		Ragdoll();
 		this.rigidbody.AddExplosionForce(force, center, radius);
 	}
-	private void TakeDamage(float damage)
+	protected virtual void TakeDamage(float damage)
 	{
 		_health -= damage;
 		if(_health <= 0f)
@@ -128,14 +129,14 @@ public class Enemy : MonoBehaviour {
 	#endregion
 
 	#region Exposed
-	public void Damage(Vector3 impactDirection, Vector3 impactPosition, float damage){
+	public virtual void Damage(Vector3 impactDirection, Vector3 impactPosition, float damage){
 		TakeDamage(damage);
 		if(_dead)
 		{
 			AnimateBulletImpact(impactDirection, impactPosition);
 		}
 	}
-	public void Explode(Vector3 explosionCenter, float explosionForce, float explosionRadius, float damage){
+	public virtual void Explode(Vector3 explosionCenter, float explosionForce, float explosionRadius, float damage){
 		TakeDamage(damage);
 		if(_dead)
 		{

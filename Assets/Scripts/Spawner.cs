@@ -9,7 +9,7 @@ public class Spawner : MonoBehaviour {
 
 	private float _cooldown = 0.0f;
 
-	public GameObject enemy;
+	public GameObject zunny;
 
 	#region Unity Lifecycle
 	void Start () {
@@ -29,7 +29,7 @@ public class Spawner : MonoBehaviour {
 
 	#region Helpers
 	private void SpawnEnemy(){
-		GameObject e = GameObject.Instantiate(enemy) as GameObject;
+		GameObject e = GameObject.Instantiate(zunny) as GameObject;
 		float radius = Mathf.Sqrt(Random.value * SPAWN_RADIUS);
 		float rot = Random.value * Mathf.PI * 2.0f;
 		Vector3 spawnPos = new Vector3(Mathf.Sin(rot) * radius, Mathf.Cos(rot) * radius, 0.0f) + this.transform.position;
