@@ -45,7 +45,6 @@ public class StateGameplay : State
 
 	private void OnGameOver()
 	{
-		_stateMachine.SetState(new StateGameOver());
-		Debug.Log("GAME OVER");
+		_stateMachine.SetState(new StateGameOver(_levelName));
 	}
 }

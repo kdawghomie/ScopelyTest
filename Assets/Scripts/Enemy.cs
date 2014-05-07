@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour {
 	private float _timeDead;
 	private bool _dead = false;
 	private bool _canAttack = true;
+	private float _health = 100f;
 	
 	#region Unity Lifecycle
 	void Awake(){
@@ -115,16 +116,31 @@ public class Enemy : MonoBehaviour {
 		Ragdoll();
 		this.rigidbody.AddExplosionForce(force, center, radius);
 	}
+	private void TakeDamage(float damage)
+	{
+		_health -= damage;
+		if(_health <= 0f)
+		{
+			_health = 0f;
+			_dead = true;
+		}
+	}
 	#endregion
 
 	#region Exposed
-	public void Damage(Vector3 impactDirection, Vector3 impactPosition){
-		AnimateBulletImpact(impactDirection, impactPosition);
-		_dead = true;
+	public void Damage(Vector3 impactDirection, Vector3 impactPosition, float damage){
+		TakeDamage(damage);
+		if(_dead)
+		{
+			AnimateBulletImpact(impactDirection, impactPosition);
+		}
 	}
-	public void Explode(Vector3 explosionCenter, float explosionForce, float explosionRadius){
-		AnimateExplosion(explosionCenter, explosionForce, explosionRadius);
-		_dead = true;
+	public void Explode(Vector3 explosionCenter, float explosionForce, float explosionRadius, float damage){
+		TakeDamage(damage);
+		if(_dead)
+		{
+			AnimateExplosion(explosionCenter, explosionForce, explosionRadius);
+		}
 	}
 	#endregion
 }

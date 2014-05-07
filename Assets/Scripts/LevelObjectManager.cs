@@ -21,7 +21,7 @@ public class LevelObjectManager : MonoBehaviour {
 
 	#endregion
 
-	#region methods
+	#region exposed
 
 	public LevelMap InstantiateLevel(string levelName)
 	{

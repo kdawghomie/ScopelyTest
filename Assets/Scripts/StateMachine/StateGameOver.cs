@@ -3,9 +3,11 @@
 public class StateGameOver : State 
 {
 	private GameOverUI _gameOverUI;
+	private string _levelName;
 
-	public StateGameOver()
+	public StateGameOver(string levelName)
 	{
+		_levelName = levelName;
 	}
 	
 	public override void Enter()
@@ -31,6 +33,6 @@ public class StateGameOver : State
 	
 	private void OnRetryPressed()
 	{
-		_stateMachine.SetState(new StateGameplay("level1"));
+		_stateMachine.SetState(new StateGameplay(_levelName));
 	}
 }
