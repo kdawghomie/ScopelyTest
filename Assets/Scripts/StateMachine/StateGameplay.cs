@@ -47,10 +47,26 @@ public class StateGameplay : State
 		OnGameOver();
 	}
 
-	private void OnEnemyDead(Enemy enemy)
+	private void OnEnemyDead(Enemy enemyDied)
 	{
-		GameObject pickup = ItemPickupManager.GetInstance().InstantiateRandomPickup(enemy.transform.position);
+		GameObject pickup = ItemPickupManager.GetInstance().InstantiateRandomPickup(enemyDied.transform.position);
 		pickup.transform.parent = _levelMap.transform;
+
+		Enemy[] enemies = (Enemy[])GameObject.FindObjectsOfType(typeof(Enemy));
+		bool enemiesStillAlive = false;
+		foreach(Enemy enemy in enemies)
+		{
+			if(!enemy.Dead)
+			{
+				enemiesStillAlive = true;
+				break;
+			}
+		}
+
+		if(!enemiesStillAlive)
+		{
+			_levelMap.OnWaveComplete();
+		}
 	}
 
 	private void OnGameOver()

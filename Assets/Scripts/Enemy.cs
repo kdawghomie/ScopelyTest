@@ -22,6 +22,11 @@ public abstract class Enemy : MonoBehaviour {
 	{
 		get{ return KILL_SCORE; }
 	}
+
+	public bool Dead
+	{
+		get{ return _dead; }
+	}
 	#endregion
 
 	#region Unity Lifecycle
