@@ -1,21 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="PlayerWeapon.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="UI/GameplayHUD.cs">
     <Files>
-      <File FileName="InitGame.cs" Line="21" Column="2" />
-      <File FileName="StateMachine/GameStateMachine.cs" Line="7" Column="1" />
-      <File FileName="StateMachine/StateGameplay.cs" Line="34" Column="39" />
-      <File FileName="Enemy.cs" Line="24" Column="33" />
-      <File FileName="Player.cs" Line="42" Column="47" />
-      <File FileName="UI/UIManager.cs" Line="23" Column="2" />
-      <File FileName="StateMachine/StateGameOver.cs" Line="28" Column="2" />
-      <File FileName="UI/StartScreenUI.cs" Line="9" Column="39" />
-      <File FileName="UI/GameOverUI.cs" Line="5" Column="2" />
-      <File FileName="StateMachine/State.cs" Line="16" Column="40" />
-      <File FileName="UI/GameplayHUD.cs" Line="10" Column="3" />
-      <File FileName="EnemyZunny.cs" Line="3" Column="1" />
-      <File FileName="PlayerWeapon.cs" Line="78" Column="8" />
-      <File FileName="Spawner.cs" Line="20" Column="31" />
+      <File FileName="StateMachine/StateGameplay.cs" Line="7" Column="38" />
+      <File FileName="Player.cs" Line="97" Column="4" />
+      <File FileName="UI/GameplayHUD.cs" Line="61" Column="3" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -23,8 +12,9 @@
           <Node name="ScopelyTest" expanded="True">
             <Node name="Scripts" expanded="True">
               <Node name="StateMachine" expanded="True" />
-              <Node name="UI" expanded="True" />
-              <Node name="PlayerWeapon.cs" selected="True" />
+              <Node name="UI" expanded="True">
+                <Node name="GameplayHUD.cs" selected="True" />
+              </Node>
             </Node>
           </Node>
         </State>

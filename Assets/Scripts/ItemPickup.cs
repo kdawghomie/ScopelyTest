@@ -17,7 +17,7 @@ public class ItemPickup : MonoBehaviour
 		));
 		
 		iTween.MoveAdd(this.gameObject, iTween.Hash(
-			"amount", new Vector3(0f, -5f, 0f),
+			"amount", new Vector3(0f, -6.5f, 0f),
 			"time", 1.5f,
 			"looptype", "pingpong"
 		));

@@ -3,19 +3,27 @@ using System.Collections;
 
 public abstract class Enemy : MonoBehaviour {
 
-	[SerializeField] private float ATTACK_DAMAGE = 1.0f;
-	[SerializeField] private float ATTACK_RESET_TIME = 1.0f;
-	[SerializeField] private float MOVE_SPEED = 32.0f;
+	[SerializeField] protected float ATTACK_DAMAGE = 1.0f;
+	[SerializeField] protected float ATTACK_RESET_TIME = 1.0f;
+	[SerializeField] protected float MOVE_SPEED = 32.0f;
+	[SerializeField] protected int KILL_SCORE = 100;
 
 	public const float CORPSE_REMOVAL_DELAY = 5.0f;
 	
-	private Player _player;
-	private int _updates;
-	private float _timeDead;
-	private bool _dead = false;
-	private bool _canAttack = true;
-	private float _health = 100f;
-	
+	protected Player _player;
+	protected int _updates;
+	protected float _timeDead;
+	protected bool _dead = false;
+	protected bool _canAttack = true;
+	protected float _health = 100f;
+
+	#region Properties
+	public int KillScore
+	{
+		get{ return KILL_SCORE; }
+	}
+	#endregion
+
 	#region Unity Lifecycle
 	protected virtual void Awake(){
 		this.GetComponent<MeshRenderer>().enabled = false;

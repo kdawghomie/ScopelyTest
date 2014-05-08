@@ -2,9 +2,9 @@
 
 public class StateGameplay : State 
 {
-	private string _levelName;
-	private LevelMap _levelMap;
-	private GameplayHUD _gameHUD;
+	private string _levelName = "";
+	private LevelMap _levelMap = null;
+	private GameplayHUD _gameHUD = null;
 
 	public StateGameplay(string levelName)
 	{

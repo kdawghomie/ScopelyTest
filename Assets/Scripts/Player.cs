@@ -105,6 +105,8 @@ public class Player : MonoBehaviour {
 
 	public void OnKilledEnemy(Enemy enemy)
 	{
+		_gameplayHUD.AddScore(enemy.KillScore);
+
 		if(KilledEnemy != null)
 		{
 			KilledEnemy(enemy);
