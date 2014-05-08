@@ -25,7 +25,8 @@ public class LevelMap : MonoBehaviour
 			_enemySpawners.Add(enemySpawnerObject.GetComponent<Spawner>());
 		}
 
-		GameObject playerObject = Instantiate(_playerPrefab, _playerPrefab.transform.position, Quaternion.identity) as GameObject;
+		Transform playerSpawnMarker = this.transform.FindChild("PlayerSpawnMarker");
+		GameObject playerObject = Instantiate(_playerPrefab, playerSpawnMarker.position, Quaternion.identity) as GameObject;
 		playerObject.transform.parent = this.transform;
 		_player = playerObject.GetComponent<Player>();
 	}
