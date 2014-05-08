@@ -4,16 +4,19 @@ public class StateGameOver : State
 {
 	private GameOverUI _gameOverUI;
 	private string _levelName;
+	private int _score;
 
-	public StateGameOver(string levelName)
+	public StateGameOver(string levelName, int score)
 	{
 		_levelName = levelName;
+		_score = score;
 	}
 	
 	public override void Enter()
 	{
 		GameObject gameOverObject = UIManager.GetInstance().InstantiateForegroundUI(UIManager.GetInstance().GameOverUI);
 		_gameOverUI = gameOverObject.GetComponent<GameOverUI>();
+		_gameOverUI.Init(_score);
 		_gameOverUI.MainMenuPressed += OnMainMenuPressed;
 		_gameOverUI.RetryPressed += OnRetryPressed;
 	}

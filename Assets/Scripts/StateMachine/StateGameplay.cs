@@ -55,7 +55,7 @@ public class StateGameplay : State
 
 	private void OnGameOver()
 	{
-		_stateMachine.SetState(new StateGameOver(_levelName));
+		_stateMachine.SetState(new StateGameOver(_levelName, _gameHUD.Score));
 	}
 	#endregion
 }
