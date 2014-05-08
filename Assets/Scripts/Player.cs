@@ -19,8 +19,8 @@ public class Player : MonoBehaviour {
 	public const float PLAYER_HEIGHT = 16.0f;
 
 	// Events
-	public delegate void DamageTakenHandler(float newHealth);
-	public event DamageTakenHandler DamageTaken = null;
+	public delegate void PlayerDeadHandler();
+	public event PlayerDeadHandler PlayerDead = null;
 
 	public delegate void KilledEnemyHandler(Enemy enemy);
 	public event KilledEnemyHandler KilledEnemy = null;
@@ -34,25 +34,30 @@ public class Player : MonoBehaviour {
 	private Quaternion _capsuleColliderRotation;
 
 	private float _health = 100.0f;
+
+	private GameplayHUD _gameplayHUD;
 	
 	#region Unity Lifecycle
-	void Start () {
+	public void Init(GameplayHUD gameplayHUD)
+	{
+		_gameplayHUD = gameplayHUD;
+
 		_capsuleCollider = this.transform.FindChild("PlayerCollider");
 		_capsuleColliderRotation = _capsuleCollider.rotation;
-
+		
 		// Get required components and default camera orientation
 		_cam = Camera.main;
 		if (_cam == null){
 			Debug.LogError("Player: Start: _cam is null");
 			return;
 		}
-
+		
 		_initialCameraRot = _cam.transform.rotation;
-
+		
 		// Set default render settings
 		DefaultFog();
 		DefaultClipping();
-
+		
 		// Fall to ground if Camera was placed too high
 		Move(Vector3.up, 0.0f);
 	}
@@ -66,17 +71,36 @@ public class Player : MonoBehaviour {
 	#endregion
 
 	#region Public
-	public void AttackWithDamage(float damage)
+	public void Attack(float damage)
 	{
-		_health -= damage;
-		if(_health < 0.0f)
+		float newHealth = _health - damage;
+		if(newHealth <= 0f)
 		{
-			_health = 0.0f;
+			if(PlayerDead != null)
+			{
+				PlayerDead();
+			}
 		}
-		if(DamageTaken != null)
+		SetHealth(newHealth);
+	}
+
+	public void AddHealth(float add)
+	{
+		SetHealth(_health + add);
+	}
+
+	public void SetHealth(float newHealth)
+	{
+		if(newHealth > 100f)
 		{
-			DamageTaken(_health);
+			newHealth = 100f;
 		}
+		else if(newHealth < 0f)
+		{
+			newHealth = 0f;
+		}
+		_health = newHealth;
+		_gameplayHUD.SetHealth(_health);
 	}
 
 	public void OnKilledEnemy(Enemy enemy)

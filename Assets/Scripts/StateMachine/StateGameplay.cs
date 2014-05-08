@@ -21,7 +21,8 @@ public class StateGameplay : State
 		_gameHUD.Init();
 
 		_levelMap = LevelObjectManager.GetInstance().InstantiateLevel(_levelName);
-		_levelMap.Player.DamageTaken += OnPlayerDamageTaken;
+		_levelMap.Player.Init(_gameHUD);
+		_levelMap.Player.PlayerDead += OnPlayerDead;
 		_levelMap.Player.KilledEnemy += OnEnemyDead;
 	}
 	
@@ -29,8 +30,8 @@ public class StateGameplay : State
 	{
 		_levelMap.Player.enabled = false;
 		GameObject.Destroy(_levelMap.gameObject);
-		// We must delay HUD destruction a bit, since we cannot destroy NGUI elements mid-frame whilst physics triggers/functions are active;
-		// this is because NGUI uses DestroyImmediate when in Editor and Unity will not allow DestroyImmediate and physics calls to be called in the same frame
+		/* We must delay HUD destruction a bit, since we cannot destroy NGUI elements mid-frame whilst physics triggers/functions are active;
+		   this is because NGUI uses DestroyImmediate when in Editor and Unity will not allow physics calls to occur after DestroyImmediate in that frame */
 		GameObject.Destroy(_gameHUD.gameObject, .001f);	
 
 		ShowMouse(true);
@@ -41,13 +42,9 @@ public class StateGameplay : State
 	#endregion
 
 	#region private
-	private void OnPlayerDamageTaken(float playerHealth)
+	private void OnPlayerDead()
 	{
-		_gameHUD.SetHealth(playerHealth);
-		if(playerHealth <= 0f)
-		{
-			OnGameOver();
-		}
+		OnGameOver();
 	}
 
 	private void OnEnemyDead(Enemy enemy)

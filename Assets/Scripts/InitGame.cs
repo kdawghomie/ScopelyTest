@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class InitGame : MonoBehaviour {
-
+public class InitGame : MonoBehaviour
+{
 	private GameStateMachine _stateMachine = null;
 
 	void Awake()

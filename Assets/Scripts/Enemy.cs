@@ -96,9 +96,9 @@ public abstract class Enemy : MonoBehaviour {
 	}
 	protected virtual void AttackPlayer()
 	{
-		if(_canAttack)
+		if(!_dead && _canAttack)
 		{
-			_player.AttackWithDamage(ATTACK_DAMAGE);
+			_player.Attack(ATTACK_DAMAGE);
 			_canAttack = false;
 			Invoke("ResetCanAttack", ATTACK_RESET_TIME);
 		}
