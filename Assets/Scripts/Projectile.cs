@@ -45,8 +45,7 @@ public class Projectile : MonoBehaviour
 		if(canCollide)
 		{
 			GameObject collidingObject = collider.gameObject;
-			Effect(this.transform.position, _impactEffect);
-
+			GameObject.Instantiate(_impactEffect, this.transform.position, Quaternion.identity);
 			DamageEnemies(collider);
 
 			GameObject.Destroy(this.gameObject);
@@ -71,10 +70,5 @@ public class Projectile : MonoBehaviour
 		{
 			enemyHit.Explode(this.transform.position, _explosiveForce, _explosiveRadius, _damage);
 		}
-	}
-
-	private void Effect(Vector3 position, GameObject effectObject){
-		GameObject effect = GameObject.Instantiate(effectObject) as GameObject;
-		effect.transform.position = position;
 	}
 }
