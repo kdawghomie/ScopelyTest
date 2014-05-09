@@ -19,8 +19,15 @@ public abstract class PlayerWeapon : MonoBehaviour {
 	protected int _currentAmmo;
 	protected bool _allowShooting = true;
 
-	#region Unity Lifecycle
-	protected void Start () {
+	#region Properties
+	public int CurrentAmmo
+	{
+		get{ return _currentAmmo; }
+	}
+	#endregion
+
+	#region Lifecycle
+	public void Init() {
 		
 		// Get reference to Camera
 		_cam = Camera.main;
@@ -41,15 +48,16 @@ public abstract class PlayerWeapon : MonoBehaviour {
 			{
 				_shootCooldown = SHOOT_COOLDOWN;
 				_allowShooting = true;
+				Debug.Log("allow shoot");
 			}
 		} 
 		else
 		{
-			// Press spacebar to shoot
+			/*// Press spacebar to shoot
 			if(Input.GetKey(KeyCode.Space) && _currentAmmo > 0) 
 			{
 				Shoot();
-			}
+			}*/
 		}
 	}
 	#endregion
@@ -84,6 +92,16 @@ public abstract class PlayerWeapon : MonoBehaviour {
 		if(WeaponShoot != null)
 		{
 			WeaponShoot(_currentAmmo);
+		}
+	}
+	#endregion
+
+	#region Exposed
+	public void TryShoot()
+	{
+		if(_allowShooting && _currentAmmo > 0)
+		{
+			Shoot();
 		}
 	}
 	#endregion

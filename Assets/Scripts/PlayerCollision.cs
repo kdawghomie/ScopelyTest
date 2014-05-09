@@ -29,7 +29,11 @@ public class PlayerCollision : MonoBehaviour
 			BulletsPickup bulletsPickup = pickupObject.GetComponent<BulletsPickup>();
 			_player.GetComponent<WeaponManager>().AddAmmoForWeapon(typeof(PlayerWeaponAK47), bulletsPickup.ammoAmount);
 		}
-
+		else if(pickupObject.GetComponent<RocketsPickup>() != null)
+		{
+			RocketsPickup rocketsPickup = pickupObject.GetComponent<RocketsPickup>();
+			_player.GetComponent<WeaponManager>().AddAmmoForWeapon(typeof(PlayerWeaponRocketLauncher), rocketsPickup.rocketsAmount);
+		}
 		GameObject.Destroy(pickupObject.gameObject);
 	}
 }
