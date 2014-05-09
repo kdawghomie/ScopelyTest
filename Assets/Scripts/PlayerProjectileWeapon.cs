@@ -10,5 +10,6 @@ public abstract class PlayerProjectileWeapon : PlayerWeapon
 	{
 		base.Shoot();
 		GameObject projectile = Instantiate(_projectilePrefab, _projectileSpawnTransform.position, this.transform.rotation) as GameObject;
+		projectile.GetComponent<Projectile>().Init(DAMAGE_AMOUNT);
 	}
 }
