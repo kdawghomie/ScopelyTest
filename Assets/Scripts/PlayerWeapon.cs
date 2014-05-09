@@ -1,22 +1,26 @@
 using UnityEngine;
 using System.Collections;
 
-public class PlayerWeapon : MonoBehaviour {
-
-	public const float IMPACT_OFFSET = 0.01f;
-	public const float SHOOT_COOLDOWN = 0.15f;
-	public const float ACCURACY_DELTA = 3.0f;
-	public const float DAMAGE_AMOUNT = 35.0f;
-
+public abstract class PlayerWeapon : MonoBehaviour {
+	// Editor variables
+	public float SHOOT_COOLDOWN = 0.15f;
+	public float DAMAGE_AMOUNT = 35.0f;
+	public int MAX_AMMO = 100;
 	public AudioClip shootSound;
 	public GameObject bulletImpact;
-	public GameObject bloodSpray;
 
-	private float _shootCooldown;
-	private Camera _cam;
+	// Events
+	public delegate void WeaponShootHandler(int ammo);
+	public event WeaponShootHandler WeaponShoot = null;
+
+	// Member variables
+	protected float _shootCooldown;
+	protected Camera _cam;
+	protected int _currentAmmo;
+	protected bool _allowShooting = true;
 
 	#region Unity Lifecycle
-	void Start () {
+	protected void Start () {
 		
 		// Get reference to Camera
 		_cam = Camera.main;
@@ -24,73 +28,62 @@ public class PlayerWeapon : MonoBehaviour {
 			Debug.LogError("PlayerWeapon: Start: could not find required Camera component");
 			return;
 		}
-	}
-	void Update () {
-		
-		// Press spacebar to shoot
-		if (Input.GetKey(KeyCode.Space)) {
-			Shoot ();
-		}
 
-		_shootCooldown -= Time.deltaTime;
+		_currentAmmo = MAX_AMMO;
+		_shootCooldown = SHOOT_COOLDOWN;
+	}
+	protected void Update () 
+	{
+		if(!_allowShooting) 
+		{
+			_shootCooldown -= Time.deltaTime;
+			if(_shootCooldown <= 0f)
+			{
+				_shootCooldown = SHOOT_COOLDOWN;
+				_allowShooting = true;
+			}
+		} 
+		else
+		{
+			// Press spacebar to shoot
+			if(Input.GetKey(KeyCode.Space) && _currentAmmo > 0) 
+			{
+				Shoot();
+			}
+		}
 	}
 	#endregion
 	
+	#region Exposed
+	public int AddAmmo(int ammo)
+	{
+		_currentAmmo += ammo;
+		if(_currentAmmo > MAX_AMMO)
+		{
+			_currentAmmo = MAX_AMMO;
+		}
+		return _currentAmmo;
+	}
+	#endregion
 
 	#region Gun Helpers
-	private void Effect(Vector3 position, GameObject effectObject){
+	protected void Effect(Vector3 position, GameObject effectObject){
 		GameObject effect = GameObject.Instantiate(effectObject) as GameObject;
 		effect.transform.position = position;
 	}
-	private Quaternion GetOffsetQuaternion(float radius, float angleInRadians){
+	protected Quaternion GetOffsetQuaternion(float radius, float angleInRadians){
 		Quaternion xQuaternion = Quaternion.AngleAxis(Mathf.Sin (angleInRadians) * radius, Vector3.up);
 		Quaternion yQuaternion = Quaternion.AngleAxis(Mathf.Cos (angleInRadians) * radius, Vector3.left);
 		return xQuaternion * yQuaternion;
 	}
-	private void Shoot(){
-		
-		// Early return if we are cooling down
-		if (_shootCooldown < 0.0f) {
-			_shootCooldown = SHOOT_COOLDOWN;
-		} else {
-			return;
-		}
+	protected virtual void Shoot()
+	{
+		_allowShooting = false;
 
-		// Calculate shoot direction
-		Quaternion shootRotation = _cam.transform.rotation;
-		float angle = Random.value * Mathf.PI * 2.0f;
-		float radius = Mathf.Sqrt(Random.value) * ACCURACY_DELTA; 
-		Vector3 shootVector = (shootRotation * GetOffsetQuaternion(radius, angle)) * Vector3.forward;
-
-		// Play gunshot sound
-		AudioSource.PlayClipAtPoint(shootSound, this.transform.position);
-
-		// Do Raycast and find collision point
-		RaycastHit hit = new RaycastHit ();
-		bool collided = Physics.Raycast (_cam.transform.position, shootVector, out hit);
-		if (!collided) {
-			return;
-		}
-
-		// Damage the enemy
-		bool hitEnemy = false;
-		if (hit.collider.gameObject.tag == "Enemy") {
-			try{
-				Enemy e = hit.collider.gameObject.GetComponent<Enemy>();
-				e.Damage(-hit.normal, hit.point, DAMAGE_AMOUNT);
-				hitEnemy = true;
-			}catch{
-				Debug.LogError("PlayerWeapon: Shoot: not an enemy");
-				return;
-			}
-		}
-
-		// Create bullet impact effect
-		Vector3 impactPoint = hit.point + hit.normal * IMPACT_OFFSET;
-		if (hitEnemy){
-			Effect (impactPoint, bloodSpray);
-		}else{
-			Effect (impactPoint, bulletImpact);
+		_currentAmmo--;
+		if(WeaponShoot != null)
+		{
+			WeaponShoot(_currentAmmo);
 		}
 	}
 	#endregion

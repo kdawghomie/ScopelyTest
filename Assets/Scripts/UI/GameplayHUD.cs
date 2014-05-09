@@ -80,15 +80,18 @@ public class GameplayHUD : MonoBehaviour
 		));
 	}
 
-	public void SetAmmo(int ammo)
+	public void SetAmmo(int ammo, bool usePunchScale)
 	{
 		_ammoLabel.text = ammo.ToString();
 
-		iTween.PunchScale(_ammoLabel.gameObject, iTween.Hash(
-			"amount", new Vector3(1.5f, 1.5f, 1.5f),
-			"easetype", "easeInOutElastic",
-			"time", .5f
-		));
+		if(usePunchScale)
+		{
+			iTween.PunchScale(_ammoLabel.gameObject, iTween.Hash(
+				"amount", new Vector3(1.5f, 1.5f, 1.5f),
+				"easetype", "easeInOutElastic",
+				"time", .5f
+			));
+		}
 	}
 
 	public void DisplayWaveCompleteLabel()

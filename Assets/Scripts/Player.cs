@@ -43,6 +43,10 @@ public class Player : MonoBehaviour {
 	{
 		get{ return _weaponPositionTransform; }
 	}
+	public GameplayHUD GameplayHUD
+	{
+		get{ return _gameplayHUD; }
+	}
 	#endregion
 
 	#region Unity Lifecycle

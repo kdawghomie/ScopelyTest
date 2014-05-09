@@ -13,14 +13,23 @@ public class PlayerCollision : MonoBehaviour
 	{
 		if(collider.gameObject.tag == "Pickup")
 		{
-			GameObject pickupObject = collider.gameObject;
-			if(pickupObject.GetComponent<HealthPickup>() != null)
-			{
-				HealthPickup healthPickup =  pickupObject.GetComponent<HealthPickup>();
-				_player.AddHealth(healthPickup.healAmount);
-			}
-
-			GameObject.Destroy(collider.gameObject);
+			OnGotPickup(collider.gameObject);
 		}
+	}
+
+	private void OnGotPickup(GameObject pickupObject)
+	{
+		if(pickupObject.GetComponent<HealthPickup>() != null)
+		{
+			HealthPickup healthPickup =  pickupObject.GetComponent<HealthPickup>();
+			_player.AddHealth(healthPickup.healAmount);
+		}
+		else if(pickupObject.GetComponent<BulletsPickup>() != null)
+		{
+			BulletsPickup bulletsPickup = pickupObject.GetComponent<BulletsPickup>();
+			_player.GetComponent<WeaponManager>().AddAmmoForWeapon(typeof(PlayerWeaponAK47), bulletsPickup.ammoAmount);
+		}
+
+		GameObject.Destroy(pickupObject.gameObject);
 	}
 }

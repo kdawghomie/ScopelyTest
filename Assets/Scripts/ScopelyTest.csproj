@@ -102,6 +102,36 @@
     <Compile Include="UI\UIManager.cs">
       <Link>Scripts\UI\UIManager.cs</Link>
     </Compile>
+    <Compile Include="BulletsPickup.cs">
+      <Link>Scripts\BulletsPickup.cs</Link>
+    </Compile>
+    <Compile Include="EnemyWaveManager.cs">
+      <Link>Scripts\EnemyWaveManager.cs</Link>
+    </Compile>
+    <Compile Include="EnemyZunny.cs">
+      <Link>Scripts\EnemyZunny.cs</Link>
+    </Compile>
+    <Compile Include="HealthPickup.cs">
+      <Link>Scripts\HealthPickup.cs</Link>
+    </Compile>
+    <Compile Include="ItemPickup.cs">
+      <Link>Scripts\ItemPickup.cs</Link>
+    </Compile>
+    <Compile Include="ItemPickupManager.cs">
+      <Link>Scripts\ItemPickupManager.cs</Link>
+    </Compile>
+    <Compile Include="PlayerCollision.cs">
+      <Link>Scripts\PlayerCollision.cs</Link>
+    </Compile>
+    <Compile Include="PlayerRaycastWeapon.cs">
+      <Link>Scripts\PlayerRaycastWeapon.cs</Link>
+    </Compile>
+    <Compile Include="PlayerWeaponAK47.cs">
+      <Link>Scripts\PlayerWeaponAK47.cs</Link>
+    </Compile>
+    <Compile Include="WeaponManager.cs">
+      <Link>Scripts\WeaponManager.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="BloodSpray.cs.meta">
@@ -199,6 +229,36 @@
     </None>
     <None Include="UI\UIManager.cs.meta">
       <Link>Scripts\UI\UIManager.cs.meta</Link>
+    </None>
+    <None Include="BulletsPickup.cs.meta">
+      <Link>Scripts\BulletsPickup.cs.meta</Link>
+    </None>
+    <None Include="EnemyWaveManager.cs.meta">
+      <Link>Scripts\EnemyWaveManager.cs.meta</Link>
+    </None>
+    <None Include="EnemyZunny.cs.meta">
+      <Link>Scripts\EnemyZunny.cs.meta</Link>
+    </None>
+    <None Include="HealthPickup.cs.meta">
+      <Link>Scripts\HealthPickup.cs.meta</Link>
+    </None>
+    <None Include="ItemPickup.cs.meta">
+      <Link>Scripts\ItemPickup.cs.meta</Link>
+    </None>
+    <None Include="ItemPickupManager.cs.meta">
+      <Link>Scripts\ItemPickupManager.cs.meta</Link>
+    </None>
+    <None Include="PlayerCollision.cs.meta">
+      <Link>Scripts\PlayerCollision.cs.meta</Link>
+    </None>
+    <None Include="PlayerRaycastWeapon.cs.meta">
+      <Link>Scripts\PlayerRaycastWeapon.cs.meta</Link>
+    </None>
+    <None Include="PlayerWeaponAK47.cs.meta">
+      <Link>Scripts\PlayerWeaponAK47.cs.meta</Link>
+    </None>
+    <None Include="WeaponManager.cs.meta">
+      <Link>Scripts\WeaponManager.cs.meta</Link>
     </None>
   </ItemGroup>
 </Project>

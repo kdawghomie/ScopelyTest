@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class WeaponManager : MonoBehaviour {
 
 	[SerializeField] private List<GameObject> _weaponPrefabs = null;
-	private List<GameObject> _weapons = new List<GameObject>();
+	private List<PlayerWeapon> _weapons = new List<PlayerWeapon>();
 	private int _currentWeaponIndex = 0;
 
 	#region Lifecycle
@@ -18,13 +18,15 @@ public class WeaponManager : MonoBehaviour {
 		}
 		for(int i = 0; i < _weaponPrefabs.Count; i++)
 		{
-			GameObject weapon = Instantiate(_weaponPrefabs[i], player.WeaponPositionTransform.position, Quaternion.identity) as GameObject;
-			weapon.transform.parent = player.transform;
+			GameObject weaponObject = Instantiate(_weaponPrefabs[i], player.WeaponPositionTransform.position, Quaternion.identity) as GameObject;
+			weaponObject.transform.parent = player.transform;
+			PlayerWeapon playerWeapon = weaponObject.GetComponent<PlayerWeapon>();
+			playerWeapon.WeaponShoot += OnWeaponShoot;
 			if(i != 0) // first weapon in list is first active weapon
 			{
-				weapon.SetActive(false);
+				weaponObject.SetActive(false);
 			}
-			_weapons.Add(weapon);
+			_weapons.Add(playerWeapon);
 		}
 	}
 
@@ -52,11 +54,35 @@ public class WeaponManager : MonoBehaviour {
 		{
 			if(i == _currentWeaponIndex)
 			{
-				_weapons[i].SetActive(true);
+				_weapons[i].gameObject.SetActive(true);
 			}
 			else
 			{
-				_weapons[i].SetActive(false);
+				_weapons[i].gameObject.SetActive(false);
+			}
+		}
+	}
+
+	private void OnWeaponShoot(int ammo)
+	{
+		this.GetComponent<Player>().GameplayHUD.SetAmmo(ammo, false);
+	}
+	#endregion
+
+	#region Exposed
+	public void AddAmmoForWeapon(System.Type weaponType, int ammo)
+	{
+		for(int i = 0; i < _weapons.Count; i++)
+		{
+			PlayerWeapon weapon = _weapons[i];
+			if(weapon.GetType() == weaponType)
+			{
+				int currentAmmo = weapon.AddAmmo(ammo);
+				if(i == _currentWeaponIndex)
+				{
+					this.GetComponent<Player>().GameplayHUD.SetAmmo(currentAmmo, true);
+				}
+				break;
 			}
 		}
 	}
