@@ -4,6 +4,10 @@ using System.Collections.Generic;
 
 public class LevelMap : MonoBehaviour 
 {
+	// Constants
+	private const float WAVE_TRANSITION_DELAY = 5.0f;
+
+	// Editor variables
 	[SerializeField] private GameObject _enemySpawnerPrefab = null;
 	[SerializeField] private GameObject _playerPrefab = null;
 	// each level prefab can determine starting enemy wave count; difficulty ramp-up
@@ -11,6 +15,7 @@ public class LevelMap : MonoBehaviour
 	[SerializeField] private int _minNextWaveEnemyIncrease = 4;
 	[SerializeField] private int _maxNextWaveEnemyIncrease = 7;
 
+	// Member variables
 	private Player _player = null;
 	private List<Spawner> _enemySpawners = new List<Spawner>();
 	private EnemyWaveManager _enemyWaveManager;
@@ -47,7 +52,7 @@ public class LevelMap : MonoBehaviour
 	#region Exposed
 	public void OnWaveComplete()
 	{
-		Invoke("BeginNextWave", 3.0f);
+		Invoke("BeginNextWave", WAVE_TRANSITION_DELAY);
 	}
 	#endregion
 

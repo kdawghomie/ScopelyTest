@@ -10,6 +10,7 @@ public class GameplayHUD : MonoBehaviour
 	[SerializeField] private UILabel _healthLabel = null;
 	[SerializeField] private UILabel _ammoLabel = null;
 	[SerializeField] private UILabel _scoreLabel = null;
+	[SerializeField] private UILabel _waveCompleteLabel = null;
 
 	// member variables
 	private int _score = 0;
@@ -25,13 +26,14 @@ public class GameplayHUD : MonoBehaviour
 	#region Lifecycle
 	public void Init()
 	{
+		_waveCompleteLabel.alpha = 0f;
 		_healthLabel.text = "100%";
 		_ammoLabel.text = "100"; // TODO: create weapon manager class?
 	}
 
 	private void Update()
 	{
-		UpdateScoreLabel();
+		UpdateScoreLabel(); 
 	}
 	#endregion
 
@@ -47,6 +49,11 @@ public class GameplayHUD : MonoBehaviour
 			}
 			_scoreLabel.text = _currentLabelScore.ToString();
 		}
+	}
+
+	private void FadeOutWaveCompleteLabel()
+	{
+		TweenAlpha.Begin(_waveCompleteLabel.gameObject, 3.6f, 0f);
 	}
 	#endregion
 
@@ -82,6 +89,20 @@ public class GameplayHUD : MonoBehaviour
 			"easetype", "easeInOutElastic",
 			"time", .5f
 		));
+	}
+
+	public void DisplayWaveCompleteLabel()
+	{
+		_waveCompleteLabel.alpha = 1f;
+		float scaleFromTime = 0.2f;
+
+		iTween.ScaleFrom(_waveCompleteLabel.gameObject, iTween.Hash(
+			"scale", new Vector3(60f, 60f, 1f),
+			"easetype", "easeInOutExpo",
+			"time", scaleFromTime
+		));
+
+		Invoke("FadeOutWaveCompleteLabel", scaleFromTime);
 	}
 	#endregion
 }

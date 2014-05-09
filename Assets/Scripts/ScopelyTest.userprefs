@@ -1,14 +1,14 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Spawner.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="UI/GameplayHUD.cs">
     <Files>
-      <File FileName="StateMachine/StateGameplay.cs" Line="49" Column="2" />
+      <File FileName="StateMachine/StateGameplay.cs" Line="66" Column="25" />
       <File FileName="Player.cs" Line="1" Column="1" />
-      <File FileName="UI/GameplayHUD.cs" Line="23" Column="12" />
-      <File FileName="StateMachine/StateGameOver.cs" Line="28" Column="2" />
-      <File FileName="UI/GameOverUI.cs" Line="21" Column="3" />
-      <File FileName="UI/StartScreenUI.cs" Line="26" Column="29" />
-      <File FileName="Spawner.cs" Line="21" Column="25" />
+      <File FileName="UI/GameplayHUD.cs" Line="41" Column="31" />
+      <File FileName="StateMachine/StateGameOver.cs" Line="1" Column="1" />
+      <File FileName="LevelMap.cs" Line="1" Column="1" />
+      <File FileName="EnemyWaveManager.cs" Line="1" Column="1" />
+      <File FileName="Spawner.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -16,8 +16,9 @@
           <Node name="ScopelyTest" expanded="True">
             <Node name="Scripts" expanded="True">
               <Node name="StateMachine" expanded="True" />
-              <Node name="UI" expanded="True" />
-              <Node name="Spawner.cs" selected="True" />
+              <Node name="UI" expanded="True">
+                <Node name="GameplayHUD.cs" selected="True" />
+              </Node>
             </Node>
           </Node>
         </State>

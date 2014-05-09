@@ -65,8 +65,14 @@ public class StateGameplay : State
 
 		if(!enemiesStillAlive)
 		{
-			_levelMap.OnWaveComplete();
+			OnWaveComplete();
 		}
+	}
+
+	private void OnWaveComplete()
+	{
+		_gameHUD.DisplayWaveCompleteLabel();
+		_levelMap.OnWaveComplete();
 	}
 
 	private void OnGameOver()
