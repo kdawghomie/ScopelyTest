@@ -7,6 +7,7 @@ public abstract class PlayerRaycastWeapon : PlayerWeapon
 	public const float ACCURACY_DELTA = 3.0f;
 
 	public GameObject bloodSpray;
+	public GameObject bulletImpact;
 
 	override protected void Shoot()
 	{
@@ -17,9 +18,6 @@ public abstract class PlayerRaycastWeapon : PlayerWeapon
 		float angle = Random.value * Mathf.PI * 2.0f;
 		float radius = Mathf.Sqrt(Random.value) * ACCURACY_DELTA; 
 		Vector3 shootVector = (shootRotation * GetOffsetQuaternion(radius, angle)) * Vector3.forward;
-		
-		// Play gunshot sound
-		AudioSource.PlayClipAtPoint(shootSound, this.transform.position);
 		
 		// Do Raycast and find collision point
 		RaycastHit hit = new RaycastHit ();
@@ -48,5 +46,10 @@ public abstract class PlayerRaycastWeapon : PlayerWeapon
 		}else{
 			Effect (impactPoint, bulletImpact);
 		}
+	}
+
+	protected void Effect(Vector3 position, GameObject effectObject){
+		GameObject effect = GameObject.Instantiate(effectObject) as GameObject;
+		effect.transform.position = position;
 	}
 }

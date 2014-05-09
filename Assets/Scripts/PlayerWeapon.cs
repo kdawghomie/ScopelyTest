@@ -7,7 +7,6 @@ public abstract class PlayerWeapon : MonoBehaviour {
 	public float DAMAGE_AMOUNT = 35.0f;
 	public int MAX_AMMO = 100;
 	public AudioClip shootSound;
-	public GameObject bulletImpact;
 
 	// Events
 	public delegate void WeaponShootHandler(int ammo);
@@ -48,17 +47,8 @@ public abstract class PlayerWeapon : MonoBehaviour {
 			{
 				_shootCooldown = SHOOT_COOLDOWN;
 				_allowShooting = true;
-				Debug.Log("allow shoot");
 			}
 		} 
-		else
-		{
-			/*// Press spacebar to shoot
-			if(Input.GetKey(KeyCode.Space) && _currentAmmo > 0) 
-			{
-				Shoot();
-			}*/
-		}
 	}
 	#endregion
 	
@@ -75,10 +65,6 @@ public abstract class PlayerWeapon : MonoBehaviour {
 	#endregion
 
 	#region Gun Helpers
-	protected void Effect(Vector3 position, GameObject effectObject){
-		GameObject effect = GameObject.Instantiate(effectObject) as GameObject;
-		effect.transform.position = position;
-	}
 	protected Quaternion GetOffsetQuaternion(float radius, float angleInRadians){
 		Quaternion xQuaternion = Quaternion.AngleAxis(Mathf.Sin (angleInRadians) * radius, Vector3.up);
 		Quaternion yQuaternion = Quaternion.AngleAxis(Mathf.Cos (angleInRadians) * radius, Vector3.left);
@@ -89,6 +75,10 @@ public abstract class PlayerWeapon : MonoBehaviour {
 		_allowShooting = false;
 
 		_currentAmmo--;
+
+		// Play gunshot sound
+		AudioSource.PlayClipAtPoint(shootSound, this.transform.position);
+
 		if(WeaponShoot != null)
 		{
 			WeaponShoot(_currentAmmo);

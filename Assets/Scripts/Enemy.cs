@@ -159,7 +159,6 @@ public abstract class Enemy : MonoBehaviour {
 		TakeDamage(damage);
 		if(_dead)
 		{
-			Debug.Log("Direction: " + impactDirection + " Position: " + impactPosition);
 			AnimateBulletImpact(impactDirection, impactPosition);
 		}
 	}
