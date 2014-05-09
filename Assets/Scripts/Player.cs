@@ -30,21 +30,31 @@ public class Player : MonoBehaviour {
 	private float _rotX;
 	private float _rotY;
 	private Quaternion _initialCameraRot;
+	private Transform _weaponPositionTransform;
 	private Transform _capsuleCollider;
 	private Quaternion _capsuleColliderRotation;
 
 	private float _health = 100.0f;
 
 	private GameplayHUD _gameplayHUD;
-	
+
+	#region Properties
+	public Transform WeaponPositionTransform
+	{
+		get{ return _weaponPositionTransform; }
+	}
+	#endregion
+
 	#region Unity Lifecycle
 	public void Init(GameplayHUD gameplayHUD)
 	{
 		_gameplayHUD = gameplayHUD;
 
+		_weaponPositionTransform = this.transform.FindChild("WeaponPositionMarker");
+
 		_capsuleCollider = this.transform.FindChild("PlayerCollider");
 		_capsuleColliderRotation = _capsuleCollider.rotation;
-		
+
 		// Get required components and default camera orientation
 		_cam = Camera.main;
 		if (_cam == null){
@@ -60,6 +70,8 @@ public class Player : MonoBehaviour {
 		
 		// Fall to ground if Camera was placed too high
 		Move(Vector3.up, 0.0f);
+
+		this.GetComponent<WeaponManager>().Init();
 	}
 
 	void Update () {
