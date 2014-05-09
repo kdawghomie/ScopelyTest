@@ -11,14 +11,6 @@ public class Spawner : MonoBehaviour {
 	public GameObject zunny;
 
 	private EnemyWaveManager _enemyWaveManager = null;
-	private bool _waveComplete = false;
-
-	#region Properties
-	public bool WaveComplete
-	{
-		set{ _waveComplete = value; }
-	}
-	#endregion
 
 	#region Unity Lifecycle
 	public void Init(EnemyWaveManager enemyWaveManager)

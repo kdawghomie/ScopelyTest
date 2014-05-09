@@ -49,9 +49,23 @@ public class StateGameplay : State
 
 	private void OnEnemyDead(Enemy enemyDied)
 	{
-		GameObject pickup = ItemPickupManager.GetInstance().InstantiateRandomPickup(enemyDied.transform.position);
-		pickup.transform.parent = _levelMap.transform;
+		TryDropPickupItem(enemyDied);
+		CheckForWaveComplete();
+	}
 
+	private void TryDropPickupItem(Enemy enemyDied)
+	{
+		float itemPickupDropOdds = enemyDied.ItemPickupDropOdds;
+		float randomPercentage = Random.Range(0.0f, 1.0f);
+		if(randomPercentage <= itemPickupDropOdds)
+		{
+			GameObject pickup = ItemPickupManager.GetInstance().InstantiateRandomPickup(enemyDied.transform.position);
+			pickup.transform.parent = _levelMap.transform;
+		}
+	}
+
+	private void CheckForWaveComplete()
+	{
 		Enemy[] enemies = (Enemy[])GameObject.FindObjectsOfType(typeof(Enemy));
 		bool enemiesStillAlive = false;
 		foreach(Enemy enemy in enemies)
@@ -62,7 +76,6 @@ public class StateGameplay : State
 				break;
 			}
 		}
-
 		if(!enemiesStillAlive)
 		{
 			OnWaveComplete();

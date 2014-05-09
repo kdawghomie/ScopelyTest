@@ -60,10 +60,6 @@ public class LevelMap : MonoBehaviour
 	private void BeginNextWave()
 	{
 		_enemyWaveManager.BeginNextWave();
-		foreach(Spawner enemySpawner in _enemySpawners)
-		{
-			enemySpawner.WaveComplete = false;
-		}
 	}
 	#endregion
 }

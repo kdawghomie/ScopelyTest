@@ -7,6 +7,7 @@ public abstract class Enemy : MonoBehaviour {
 	[SerializeField] protected float ATTACK_RESET_TIME = 1.0f;
 	[SerializeField] protected float MOVE_SPEED = 32.0f;
 	[SerializeField] protected int KILL_SCORE = 100;
+	[SerializeField] protected float ITEM_PICKUP_DROP_ODDS = 1.0f;
 
 	public const float CORPSE_REMOVAL_DELAY = 5.0f;
 	
@@ -21,6 +22,11 @@ public abstract class Enemy : MonoBehaviour {
 	public int KillScore
 	{
 		get{ return KILL_SCORE; }
+	}
+
+	public float ItemPickupDropOdds
+	{
+		get{ return ITEM_PICKUP_DROP_ODDS; }
 	}
 
 	public bool Dead
