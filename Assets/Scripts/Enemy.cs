@@ -122,20 +122,20 @@ public abstract class Enemy : MonoBehaviour {
 			Invoke("ResetCanAttack", ATTACK_RESET_TIME);
 		}
 	}
-	private void ResetCanAttack()
+	protected void ResetCanAttack()
 	{
 		_canAttack = true;
 	}
-	private void Ragdoll(){
+	protected void Ragdoll(){
 		this.rigidbody.constraints = RigidbodyConstraints.None;
 		this.rigidbody.useGravity = true;
 		this.rigidbody.drag = 0.1f;
 	}
-	private void AnimateBulletImpact(Vector3 impactDirection, Vector3 impactPosition){
+	protected void AnimateBulletImpact(Vector3 impactDirection, Vector3 impactPosition){
 		Ragdoll();
 		this.rigidbody.AddForceAtPosition(impactDirection * 3000, impactPosition);
 	}
-	private void AnimateExplosion(Vector3 center, float force, float radius){
+	protected void AnimateExplosion(Vector3 center, float force, float radius){
 		Ragdoll();
 		this.rigidbody.AddExplosionForce(force, center, radius);
 	}
