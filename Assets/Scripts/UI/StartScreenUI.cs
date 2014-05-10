@@ -8,6 +8,7 @@ public class StartScreenUI : MonoBehaviour
 
 	public delegate void EventDelegate();
 	public event EventDelegate PlayPressed; 
+	public event EventDelegate HowToPlayPressed;
 
 	public void Init()
 	{
@@ -55,6 +56,14 @@ public class StartScreenUI : MonoBehaviour
 		if(PlayPressed != null)
 		{
 			PlayPressed();
+		}
+	}
+
+	private void OnHowToPlayPressed()
+	{
+		if(HowToPlayPressed != null)
+		{
+			HowToPlayPressed();
 		}
 	}
 }

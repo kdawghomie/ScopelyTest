@@ -13,6 +13,7 @@ public class StateGameStart : State
 		_startScreenUI = startScreenObject.GetComponent<StartScreenUI>();
 		_startScreenUI.Init();
 		_startScreenUI.PlayPressed += OnPlayButtonPressed;
+		_startScreenUI.HowToPlayPressed += OnHowToPlayPressed;
 	}
 	
 	public override void Exit()
@@ -28,5 +29,10 @@ public class StateGameStart : State
 	private void OnPlayButtonPressed()
 	{
 		_stateMachine.SetState(new StateGameplay("level1"));
+	}
+
+	private void OnHowToPlayPressed()
+	{
+		_stateMachine.SetState(new StateHowToPlay());
 	}
 }
