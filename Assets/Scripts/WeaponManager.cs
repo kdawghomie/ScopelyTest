@@ -37,13 +37,13 @@ public class WeaponManager : MonoBehaviour {
 
 	private void Update()
 	{
-		if(Input.GetKeyDown(KeyCode.Tab))
-		{
-			CycleToNextWeapon();
-		}
 		if(Input.GetKey(KeyCode.Space))
 		{
 			_weapons[_currentWeaponIndex].TryShoot();
+		}
+		else if(Input.GetKeyDown(KeyCode.Tab)) // don't allow weapon switching while firing
+		{
+			CycleToNextWeapon();
 		}
 	}
 	#endregion
