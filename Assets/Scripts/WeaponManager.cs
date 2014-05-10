@@ -23,9 +23,13 @@ public class WeaponManager : MonoBehaviour {
 			PlayerWeapon playerWeapon = weaponObject.GetComponent<PlayerWeapon>();
 			playerWeapon.WeaponShoot += OnWeaponShoot;
 			playerWeapon.Init();
-			if(i != 0) // first weapon in list is first active weapon
+			if(i != 0) // first weapon in list will be active weapon
 			{
 				SetWeaponRendererEnabled(playerWeapon, false);
+			}
+			else
+			{
+				player.GameplayHUD.SetAmmo(playerWeapon.CurrentAmmo, false);
 			}
 			_weapons.Add(playerWeapon);
 		}

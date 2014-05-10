@@ -30,7 +30,6 @@ public class GameplayHUD : MonoBehaviour
 		_waveCompleteLabel.alpha = 0f;
 		_damageIndicator.alpha = 0f;
 		_healthLabel.text = "100%";
-		_ammoLabel.text = "100"; // TODO: create weapon manager class?
 	}
 
 	private void Update()
