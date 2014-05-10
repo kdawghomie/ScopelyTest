@@ -11,6 +11,7 @@ public class GameplayHUD : MonoBehaviour
 	[SerializeField] private UILabel _ammoLabel = null;
 	[SerializeField] private UILabel _scoreLabel = null;
 	[SerializeField] private UILabel _waveCompleteLabel = null;
+	[SerializeField] private UITexture _damageIndicator = null;
 
 	// member variables
 	private int _score = 0;
@@ -27,6 +28,7 @@ public class GameplayHUD : MonoBehaviour
 	public void Init()
 	{
 		_waveCompleteLabel.alpha = 0f;
+		_damageIndicator.alpha = 0f;
 		_healthLabel.text = "100%";
 		_ammoLabel.text = "100"; // TODO: create weapon manager class?
 	}
@@ -54,6 +56,11 @@ public class GameplayHUD : MonoBehaviour
 	private void FadeOutWaveCompleteLabel()
 	{
 		TweenAlpha.Begin(_waveCompleteLabel.gameObject, 3.6f, 0f);
+	}
+
+	private void FadeOutDamageIndicator()
+	{
+		TweenAlpha.Begin(_damageIndicator.gameObject, 1f, 0f);
 	}
 	#endregion
 
@@ -106,6 +113,12 @@ public class GameplayHUD : MonoBehaviour
 		));
 
 		Invoke("FadeOutWaveCompleteLabel", scaleFromTime);
+	}
+
+	public void DisplayDamageIndicator()
+	{
+		TweenAlpha.Begin(_damageIndicator.gameObject, 0.15f, 1f);
+		Invoke("FadeOutDamageIndicator", 0.7f);
 	}
 	#endregion
 }

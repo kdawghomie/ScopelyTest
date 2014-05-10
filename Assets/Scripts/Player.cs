@@ -98,6 +98,7 @@ public class Player : MonoBehaviour {
 			}
 		}
 		SetHealth(newHealth);
+		_gameplayHUD.DisplayDamageIndicator();
 	}
 
 	public void AddHealth(float add)

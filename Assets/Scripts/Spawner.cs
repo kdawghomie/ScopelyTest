@@ -46,9 +46,5 @@ public class Spawner : MonoBehaviour {
 		e.transform.parent = this.transform.parent;
 		e.transform.position = spawnPos;
 	}
-	public int EnemyCount(){
-		Enemy[] enemies = (Enemy[])GameObject.FindObjectsOfType(typeof(Enemy));
-		return enemies.Length;
-	}
 	#endregion
 }
