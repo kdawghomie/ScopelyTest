@@ -25,7 +25,7 @@ public class WeaponManager : MonoBehaviour {
 			playerWeapon.Init();
 			if(i != 0) // first weapon in list is first active weapon
 			{
-				weaponObject.GetComponent<MeshRenderer>().enabled = false;
+				SetWeaponRendererEnabled(playerWeapon, false);
 			}
 			_weapons.Add(playerWeapon);
 		}
@@ -59,12 +59,12 @@ public class WeaponManager : MonoBehaviour {
 		{
 			if(i == _currentWeaponIndex)
 			{
-				_weapons[i].GetComponent<MeshRenderer>().enabled = true;
+				SetWeaponRendererEnabled(_weapons[i], true);
 				this.GetComponent<Player>().GameplayHUD.SetAmmo(_weapons[i].CurrentAmmo, false);
 			}
 			else
 			{
-				_weapons[i].GetComponent<MeshRenderer>().enabled = false;
+				SetWeaponRendererEnabled(_weapons[i], false);
 			}
 		}
 	}
@@ -72,6 +72,15 @@ public class WeaponManager : MonoBehaviour {
 	private void OnWeaponShoot(int ammo)
 	{
 		this.GetComponent<Player>().GameplayHUD.SetAmmo(ammo, false);
+	}
+
+	private void SetWeaponRendererEnabled(PlayerWeapon weapon, bool enabled)
+	{
+		MeshRenderer renderer = weapon.gameObject.GetComponentInChildren<MeshRenderer>();
+		if(renderer != null)
+		{
+			renderer.enabled = enabled;
+		}
 	}
 	#endregion
 

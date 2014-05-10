@@ -6,8 +6,8 @@ public class Projectile : MonoBehaviour
 	[SerializeField] private float _initialVelocity = 500.0f;
 	[SerializeField] private float _maxVelocity = 500.0f;
 	[SerializeField] private float _acceleration = 50.0f;
-	[SerializeField] private float _explosiveRadius = 500.0f;
-	[SerializeField] private float _explosiveForce = 20000.0f;
+	[SerializeField] private float _explosiveRadius = 50.0f;
+	[SerializeField] private float _explosiveForce = 2000.0f;
 	[SerializeField] private GameObject _impactEffect = null;
 
 	private float _currentVelocity;

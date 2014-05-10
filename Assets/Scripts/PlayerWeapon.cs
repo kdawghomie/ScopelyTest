@@ -7,6 +7,7 @@ public abstract class PlayerWeapon : MonoBehaviour {
 	public float DAMAGE_AMOUNT = 35.0f;
 	public int MAX_AMMO = 100;
 	public AudioClip shootSound;
+	public AnimationClip shootAnimation;
 
 	// Events
 	public delegate void WeaponShootHandler(int ammo);
@@ -78,6 +79,12 @@ public abstract class PlayerWeapon : MonoBehaviour {
 
 		// Play gunshot sound
 		AudioSource.PlayClipAtPoint(shootSound, this.transform.position);
+
+		Animator animator = this.gameObject.GetComponentInChildren<Animator>();
+		if(animator != null)
+		{
+			animator.Play(shootAnimation.name);
+		}
 
 		if(WeaponShoot != null)
 		{
