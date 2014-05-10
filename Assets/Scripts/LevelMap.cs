@@ -38,7 +38,7 @@ public class LevelMap : MonoBehaviour
 			GameObject enemySpawnerObject = Instantiate(_enemySpawnerPrefab, enemySpawnMarker.transform.position, Quaternion.identity) as GameObject;
 			enemySpawnerObject.transform.parent = this.transform;
 			Spawner spawner = enemySpawnerObject.GetComponent<Spawner>();
-			spawner.Init(_enemyWaveManager);
+			spawner.Init(_enemyWaveManager, this.GetComponent<EnemySpawnConfig>());
 			_enemySpawners.Add(spawner);
 		}
 

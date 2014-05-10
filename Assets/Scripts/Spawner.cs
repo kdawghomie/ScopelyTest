@@ -8,15 +8,15 @@ public class Spawner : MonoBehaviour {
 	
 	private float _cooldown = 0.0f;
 
-	public GameObject zunny;
-
 	private EnemyWaveManager _enemyWaveManager = null;
+	private EnemySpawnConfig _enemySpawnConfig = null;
 
 	#region Unity Lifecycle
-	public void Init(EnemyWaveManager enemyWaveManager)
+	public void Init(EnemyWaveManager enemyWaveManager, EnemySpawnConfig enemySpawnConfig)
 	{
 		_cooldown = Random.value * 3.0f;
 		_enemyWaveManager = enemyWaveManager;
+		_enemySpawnConfig = enemySpawnConfig;
 	}
 
 	void Update () 
@@ -37,7 +37,9 @@ public class Spawner : MonoBehaviour {
 	#region Helpers
 	private void SpawnEnemy()
 	{
-		GameObject e = GameObject.Instantiate(zunny) as GameObject;
+		GameObject enemyPrefab = _enemySpawnConfig.GetRandomEnemyPrefabForSpawn();
+
+		GameObject e = GameObject.Instantiate(enemyPrefab) as GameObject;
 		float radius = Mathf.Sqrt(Random.value * SPAWN_RADIUS);
 		float rot = Random.value * Mathf.PI * 2.0f;
 		Vector3 spawnPos = new Vector3(Mathf.Sin(rot) * radius, Mathf.Cos(rot) * radius, 0.0f) + this.transform.position;

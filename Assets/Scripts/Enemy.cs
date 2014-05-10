@@ -8,6 +8,7 @@ public abstract class Enemy : MonoBehaviour {
 	[SerializeField] protected float MOVE_SPEED = 32.0f;
 	[SerializeField] protected int KILL_SCORE = 100;
 	[SerializeField] protected float ITEM_PICKUP_DROP_ODDS = 1.0f;
+	[SerializeField] protected float HEALTH = 100f;
 
 	public const float CORPSE_REMOVAL_DELAY = 5.0f;
 	
@@ -16,7 +17,6 @@ public abstract class Enemy : MonoBehaviour {
 	protected float _timeDead;
 	protected bool _dead = false;
 	protected bool _canAttack = true;
-	protected float _health = 100f;
 
 	#region Properties
 	public int KillScore
@@ -143,10 +143,10 @@ public abstract class Enemy : MonoBehaviour {
 	{
 		if(!_dead)
 		{
-			_health -= damage;
-			if(_health <= 0f)
+			HEALTH -= damage;
+			if(HEALTH <= 0f)
 			{
-				_health = 0f;
+				HEALTH = 0f;
 				_dead = true;
 				_player.OnKilledEnemy(this);
 			}
